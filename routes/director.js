@@ -7,6 +7,10 @@ router.post('/', (req, res, next) => {
 
   console.log('req.body is:', req.body);
 
+  // if (req.body === {}) {
+  //   return res.status(400).send('need post data')
+  // }
+
   knex('director')
 
     .insert({
@@ -14,7 +18,7 @@ router.post('/', (req, res, next) => {
       nationality: req.body.nationality
     })
     .then((director) => {
-      console.log('director= ', director);
+      // console.log('director= ', director);
 
       let newDirector = {
         name: req.body.name,
