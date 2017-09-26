@@ -4,6 +4,7 @@ const knex = require('../knex')
 
 // C
 router.post('/', (req, res, next) => {
+
   console.log('req.body is:', req.body);
   console.log(req.body.year);
 
@@ -44,6 +45,10 @@ router.get('/:id', (req, res, next) => {
 
   let id = Number(req.params.id)
 
+  if (Number.isNaN(id)) {
+    return res.status(404).send('id is not a number')
+  }
+
   knex('movie')
     .select('id', 'title', 'year')
     .where('id', id)
@@ -61,7 +66,11 @@ router.patch('/:id', (req, res, next) => {
   console.log('req.body= ', req.body);
   let id = Number(req.params.id)
 
-  // if (req.body === {}) {
+  if (Number.isNaN(id)) {
+    return res.status(404).send('id is not a number')
+  }
+
+  // if (!req.body) {
   //   return res.status(404).send('Can not update movie without info')
   // }
 
@@ -101,6 +110,10 @@ router.delete('/:id', (req, res, next) => {
 
   let id = Number(req.params.id)
 
+  if (Number.isNaN(id)) {
+    return res.status(404).send('id is not a number')
+  }
+
   knex('movie')
     .del()
     .where('id', id)
@@ -111,14 +124,10 @@ router.delete('/:id', (req, res, next) => {
       }
 
       res.status(200).send(`movie with the id: ${id} was deleted`)
-    })
+    }).catch((err) => next(err))
 
   // res.send('delete');
 })
-
-
-module.exports = router;
-
 
 
 module.exports = router;
