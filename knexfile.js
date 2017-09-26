@@ -1,5 +1,5 @@
 module.exports = {
-  developmeont: {
+  development: {
     client: 'pg',
     connection: 'postgres://localhost/movieappdb'
   }
